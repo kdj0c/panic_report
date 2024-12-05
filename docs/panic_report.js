@@ -12,8 +12,8 @@ var main_div = document.getElementById('main');
 function numbers_to_data2(numbers) {
         /* 17 decimal digits are converted to 7 bytes */
         let main_len = Math.floor(numbers.length / 17) * 7;
-        /* and the remainings bytes */
-        let rem_len = Math.floor((numbers.length % 17) + 2 / 3);
+        /* and the remainings bytes, compute the reverse of  [0, 3, 5, 8, 10, 13, 15, 17] */
+        let rem_len = Math.floor((numbers.length % 17) * 2 / 5);
 
         let data = new Uint8Array(main_len + rem_len);
         let offset = 0;
