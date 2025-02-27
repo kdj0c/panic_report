@@ -1,0 +1,8 @@
+---
+pages:
+ script:
+  - mkdir ./public/
+  - cp -r ./docs ./public/panic_report/
+ artifacts:
+  paths:
+   - public
