@@ -1,9 +1,22 @@
 // SPDX-License-Identifier: MIT
 
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-
 var main_div = document.getElementById('main');
+
+/*
+ * Check if the parameters are set as a url parameter or as a fragment
+ */
+function get_parameters() {
+        const queryString = window.location.search;
+        const fragString = window.location.hash.substring(1); //skip the leading #
+
+        const urlParams = new URLSearchParams(queryString);
+        const urlFragments = new URLSearchParams(fragString);
+
+        if (urlParams.get("z") || urlParams.get("zl")) {
+                return urlParams;
+        }
+        return urlFragments;
+}
 
 /*
  * Encoding, same as Fido2 specification.
@@ -77,8 +90,7 @@ function numbers_to_data(numbers) {
         return data;
 }
 
-function add_info(name, param) {
-        const value = urlParams.get(param);
+function add_info(name, value) {
         if (value) {
                 div = document.createElement("div");
                 n = document.createElement("b");
@@ -98,12 +110,14 @@ function add_data(data) {
 	main_div.appendChild(kmsg);
 }
 
-add_info("Arch", "a");
-add_info("Version", "v");
-add_info("Distribution", "d");
+const params = get_parameters();
 
-const numbers = urlParams.get("z");
-const legacy_numbers = urlParams.get("zl")
+add_info("Arch", params.get("a"));
+add_info("Version", params.get("v"));
+add_info("Distribution", params.get("d"));
+
+const numbers = params.get("z");
+const legacy_numbers = params.get("zl")
 if (numbers) {
 	data = numbers_to_data2(numbers);
 	add_data(data);
