@@ -55,7 +55,6 @@ function numbers_to_data(numbers) {
 
                 let b = offset + new_length;
                 if (byte_off * 8 + b >= length_in_bytes * 8) {
-                        console.log("last chunk", b);
                         b -= extra;
                 }
                 if (b < 8) {
