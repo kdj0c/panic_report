@@ -7,16 +7,12 @@ This is a simple demo, so that Linux distributions that want to use drm panic wi
 
 Drm panic is a new feature in Linux v6.10, that allows to display a panic screen when a kernel panic occurs.
 
-There is a proposal, to put debug information in a QR code in the panic screen.
-As a QR code can't encode enough data, the debug information is compressed with Zlib, and then encoded as a numeric segment.
+QR code support was merged in Linux v6.12, and allows to compress kmsg with Zlib, and then encoded as a numeric segment.
 This project decodes the numeric segment, and uncompress it to display the debug information on web site.
 
-https://patchwork.freedesktop.org/series/135886/
+## Dependencies
 
-## Code source
-
-Code source is located in docs/ because it allows github pages to work directly without changing the configuration.
-I may fix that later.
+This uses pako inflate 2.1.0 to uncompress Zlib
 
 ## Sample
 
